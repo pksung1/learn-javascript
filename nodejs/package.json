@@ -1,0 +1,13 @@
+{
+  "name": "nodejs",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "ch3": "nodemon ./nodejs 교과서/ch3/index.js"
+  },
+  "dependencies": {
+    "global": "^4.4.0",
+    "nodemon": "^2.0.15"
+  }
+}

@@ -6,7 +6,10 @@ const dotenv = require('dotenv')
 const path = require('path')
 const multer = require('multer')
 
+
 const fs = require('fs')
+
+const userRouter = require('./routes/user')
 
 try {
   fs.readdirSync('uploads')
@@ -20,8 +23,10 @@ dotenv.config();
 
 const app = express();
 
-app.set('port', process.env.PORT || 3000)
 
+app.set('port', process.env.PORT || 3000)
+app.set('views', path.join(__dirname, 'views'))
+app.set('view engine', 'pug')
 
 // console.log(path.join(__dirname, 'public'))
 app.use(
@@ -50,6 +55,8 @@ app.get('/', (req,res, next) => {
   next();
 })
 
+app.use('/user', userRouter)
+
 app.get('/home', (req, res, next) => {
   console.log('GET /home 요청 미들웨어')
   next();
@@ -62,7 +69,7 @@ app.get('/home', (req,res) => {
 const upload = multer({
   storage: multer.diskStorage({
     destination(req, file, done) {
-      done(null, 'upload/')
+      done(null, 'uploads/')
     },
     filename(req, file, done) {
       const ext = path.extname(file.originalname);
@@ -72,7 +79,7 @@ const upload = multer({
   limits: {fileSize: 5 * 1024 * 1024}
 })
 
-app.post('/upload', upload.fields([{name: 'image1'}, {name: 'title'}]), 
+app.post('/upload', upload.fields([{name: 'image1'}, {name: 'image2'}]), 
 (req, res) => {
   console.log(req.files, req.body)
   res.send('ok')

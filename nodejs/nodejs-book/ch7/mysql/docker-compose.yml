@@ -1,0 +1,14 @@
+version: '3.1'
+
+services:
+  db:
+    image: mariadb
+    restart: always
+    working_dir: /app
+    volumes:
+      - ./:/app
+    environment: 
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: nodejs
+    ports:
+      - 3002:3306

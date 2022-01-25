@@ -12,3 +12,13 @@ services:
       MYSQL_DATABASE: nodejs
     ports:
       - 3002:3306
+  
+  mongo:
+    image: mongo
+    volumes:
+      - ./app:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: nodejs
+      MONGO_INITDB_ROOT_PASSWORD: secret
+    ports:
+      - 3003:27017

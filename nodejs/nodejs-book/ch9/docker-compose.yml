@@ -1,0 +1,15 @@
+version: '3.2'
+
+services:
+  db:
+    image: mariadb
+    restart: always
+    working_dir: /app
+    volumes:
+      - ./:/app
+    environment: 
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: nodebird
+    ports:
+      - 3003:3306
+  
